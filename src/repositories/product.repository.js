@@ -1,6 +1,5 @@
 const Product=require('../models/product');
 
-
 exports.create = (data) => Product.create(data);
 
 exports.findByName = async (name) => {
