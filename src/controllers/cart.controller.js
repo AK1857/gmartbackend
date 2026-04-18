@@ -29,3 +29,27 @@ exports.getCart = async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 }
+
+exports.removeItem= async(req,res)=>{
+    try{
+        const{ productId }= req.body;
+        const userId = req.user.userId; // from JWT
+        const cart = await cartService.removeCartItem(userId, productId);
+        res.json(cart);
+
+    }catch(err){
+        res.status(400).json({ error: err.message });
+    }
+}
+
+exports.reduceQuantity= async(req,res)=>{
+    try{
+        const{ productId,quantity }= req.body;
+        const userId = req.user.userId; // from JWT
+        const cart = await cartService.reduceQuantity(userId, productId,quantity);
+        res.json(cart);
+
+    }catch(err){
+        res.status(400).json({ error: err.message });
+    }
+}

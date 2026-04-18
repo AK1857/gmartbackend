@@ -6,7 +6,7 @@ const productRoutes = require('./product.routes');
 const cartRoutes= require('./cart.routes')
 
 // const productRoutes = require('./product.routes');
-// const orderRoutes = require('./order.routes');
+const orderRoutes = require('./order.routes');
 
 // Health check (important in production)
 
@@ -19,6 +19,6 @@ router.use('/auth',authRoutes);
 router.use("/product", productRoutes);
 router.use("/cart",cartRoutes );
 // router.use('/products', productRoutes);
-// router.use('/orders', orderRoutes);
+router.use('/order', orderRoutes);
 
 module.exports = router;

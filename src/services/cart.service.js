@@ -92,3 +92,56 @@ exports.updateCartItem = async (userId, productId, qty) => {
   
     return await cart.save();
   };
+
+  exports.removeCartItem = async (userId, productId) => {
+    let cart = await Cart.findOne({ userId });
+  
+    if (!cart) throw new Error("Cart not found");
+  
+    const index = cart.items.findIndex(
+      item => item.productId.toString() === productId
+    );
+  
+    if (index === -1) {
+      throw new Error("Product not in cart");
+    }
+  
+    // remove item
+    cart.items.splice(index, 1);
+  
+    // 🔥 Recalculate total
+    cart.totalAmount = cart.items.reduce(
+      (acc, item) => acc + item.quantity * item.priceAtTime,
+      0
+    );
+  
+    return await cart.save();
+  }
+
+   exports.reduceQuantity = async (userId, productId, qty) => {
+    let cart = await Cart.findOne({ userId });
+  
+    if (!cart) throw new Error("Cart not found");
+  
+    const index = cart.items.findIndex(
+      item => item.productId.toString() === productId
+    );
+  
+    if (index === -1) {
+      throw new Error("Product not in cart");
+    }
+  
+    cart.items[index].quantity -= qty;
+  
+    if (cart.items[index].quantity <= 0) {
+      cart.items.splice(index, 1);
+    }
+  
+    // 🔥 Recalculate total
+    cart.totalAmount = cart.items.reduce(
+      (acc, item) => acc + item.quantity * item.priceAtTime,
+      0
+    );
+  
+    return await cart.save();
+  }
