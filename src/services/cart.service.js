@@ -35,7 +35,7 @@ exports.addToCart = async (userId, productId, qty) => {
     });
   }
 
-  // 🔥 Recalculate total
+  //  Recalculate total
   cart.totalAmount = cart.items.reduce(
     (acc, item) => acc + item.quantity * item.priceAtTime,
     0
@@ -57,7 +57,7 @@ exports.updateCartItem = async (userId, productId, qty) => {
       item => item.productId.toString() === productId
     );
   
-    // 🔥 CASE 1: Product NOT in cart → ADD it
+    //  CASE 1: Product NOT in cart → ADD it
     if (index === -1) {
       if (qty <= 0) {
         throw new Error("Quantity must be greater than 0");
@@ -73,7 +73,7 @@ exports.updateCartItem = async (userId, productId, qty) => {
       });
     }
   
-    // 🔥 CASE 2: Product exists → UPDATE / REMOVE
+    // CASE 2: Product exists → UPDATE / REMOVE
     else {
       if (qty <= 0) {
         // remove item
@@ -84,7 +84,7 @@ exports.updateCartItem = async (userId, productId, qty) => {
       }
     }
   
-    // 🔥 Recalculate total
+    // Recalculate total
     cart.totalAmount = cart.items.reduce(
       (acc, item) => acc + item.quantity * item.priceAtTime,
       0
@@ -109,7 +109,7 @@ exports.updateCartItem = async (userId, productId, qty) => {
     // remove item
     cart.items.splice(index, 1);
   
-    // 🔥 Recalculate total
+    //  Recalculate total
     cart.totalAmount = cart.items.reduce(
       (acc, item) => acc + item.quantity * item.priceAtTime,
       0
@@ -137,7 +137,7 @@ exports.updateCartItem = async (userId, productId, qty) => {
       cart.items.splice(index, 1);
     }
   
-    // 🔥 Recalculate total
+    //  Recalculate total
     cart.totalAmount = cart.items.reduce(
       (acc, item) => acc + item.quantity * item.priceAtTime,
       0

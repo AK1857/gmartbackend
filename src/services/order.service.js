@@ -8,14 +8,14 @@ exports.createOrder = async (userId) => {
     throw new Error("Cart is empty");
   }
 
-  // 🔥 Create order from cart snapshot
+  //  Create order from cart snapshot
   const order = await Order.create({
     userId,
     items: cart.items,
     totalAmount: cart.totalAmount
   });
 
-  // 🔥 Clear cart after order
+  //  Clear cart after order
   cart.items = [];
   cart.totalAmount = 0;
   await cart.save();
