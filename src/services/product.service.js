@@ -48,3 +48,7 @@ exports.updateProduct = async (data) => {
         throw err;
     }
 }
+
+exports.getAllProducts = async () => {
+    return await productRepo.findAll();
+}

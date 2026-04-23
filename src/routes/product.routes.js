@@ -11,6 +11,7 @@ router.post('/create', productController.create);
 // Example: Get user (add later)
 router.get('/:id',productController.getProductById);
 router.put('/update', productController.updateProduct);
+router.get('/', productController.getAllProducts);
 router.post('/insertMany',async(req,res,next)=>{
     try {
         const products = [

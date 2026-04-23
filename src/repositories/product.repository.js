@@ -12,3 +12,9 @@ exports.findById = (id) => {
 exports.update = (id, data) => {
     return Product.updateOne({ _id: id }, data);   
 };
+
+exports.findAll =  async() => {
+
+    return await Product.find({});
+
+}
